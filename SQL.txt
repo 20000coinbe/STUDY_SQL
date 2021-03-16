@@ -1,1 +1,25 @@
 WINDOW 함수
+
+ - 행과 행간의 관계를 정의하기 위한 함수
+ - GROUP BY 구문과 병행 할 수 없다
+ - WINDOW 함수로 인해 결과 건수가 줄어들지 않는다
+
+ ex) SELECT WINDOW_FUNCTION(ARGUMENTS)
+      OVER (PARTITION BY 칼럼
+              ORDER BY WINDOWING절)
+     FROM 테이블명;
+
+ - 전체합계
+    ex) SELECT EMPNO, ENAME, SAL 
+          SUM(SAL) OVER(ORDER BY SAL
+              ROWS BETWEEN UNBOUNDED PRECEDING
+              AND UNBOUNDED FOLLOWING) TOTSAL
+        FROM EMP;
+
+  - 누적합계
+     ex) SELECT EMPNO, ENAME, SAL
+          SUM(SAL) OVER(ORDER BY SAL
+              ROWS BETWEEN UNBOUNDED PRECEDING
+              AND CURRENT ROW) TOTSAL
+          FROM EMP;
+      
